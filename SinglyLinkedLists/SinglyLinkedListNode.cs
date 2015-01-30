@@ -15,14 +15,30 @@ namespace SinglyLinkedLists
         private SinglyLinkedListNode next;
         public SinglyLinkedListNode Next
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return this.next; }
+            set {
+                if (this == value)
+                {
+                    throw new ArgumentException();
+                }
+                    this.next = value;
+            }
         }
 
         private string value;
         public string Value 
         {
-            get { throw new NotImplementedException(); }
+            get { return this.value; }
+        }
+        public override string ToString()
+        {   
+            return this.value;
+        }
+        public override bool Equals(object obj)
+        {
+            return this.value == obj.ToString() && obj.GetType() == this.GetType();
+           // SinglyLinkedListNode other = obj as SinglyLinkedListNode;
+           // return other != null && this.Value.Equals(other.Value);
         }
 
         public static bool operator <(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
@@ -39,8 +55,7 @@ namespace SinglyLinkedLists
 
         public SinglyLinkedListNode(string value)
         {
-            throw new NotImplementedException();
-
+            this.value = value;
             // Used by the visualizer:
             allNodes.Add(this);
         }
@@ -48,12 +63,19 @@ namespace SinglyLinkedLists
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
         public int CompareTo(Object obj)
         {
-            throw new NotImplementedException();
+            return this.value.CompareTo(obj.ToString());
         }
 
         public bool IsLast()
         {
-            throw new NotImplementedException();
+            if (this.next == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
